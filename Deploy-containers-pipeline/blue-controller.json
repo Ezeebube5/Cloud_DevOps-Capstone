@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"blue",
-                  "image":"mehmetincefidan/capstone",
+                  "image":"ezeebube5/static_site",
                   "ports":[
                      {
                         "name":"http-server",

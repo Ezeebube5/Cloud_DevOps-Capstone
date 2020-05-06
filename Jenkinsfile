@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]){
 					sh '''
-						docker build -t mehmetincefidan/capstone .
+						docker build -t ezeebube5/static_site .
 					'''
 				}
 			}
@@ -31,7 +31,7 @@ pipeline {
 
 		stage('Set current kubectl context') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
 						kubectl config use-context arn:aws:eks:us-west-2:142977788479:cluster/k8scluster
 					'''
@@ -41,7 +41,7 @@ pipeline {
 
 		stage('Deploy blue container') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
 						kubectl apply -f ./blue-controller.json
 					'''
@@ -51,7 +51,7 @@ pipeline {
 
 		stage('Deploy green container') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
 						kubectl apply -f ./green-controller.json
 					'''
@@ -61,7 +61,7 @@ pipeline {
 
 		stage('Create the service in the cluster, redirect to blue') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
 						kubectl apply -f ./blue-service.json
 					'''
@@ -77,7 +77,7 @@ pipeline {
 
 		stage('Create the service in the cluster, redirect to green') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
 						kubectl apply -f ./green-service.json
 					'''

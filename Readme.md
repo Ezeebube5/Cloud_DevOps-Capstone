@@ -13,11 +13,11 @@ In this project, I applied my skills and knowledge which was developed throughou
 
 ## About Project: 
 
-> I created a CI/CD pipeline for a basic website that deploys to a cluster in AWS EKS which is Blue/Green Deployment.
+> I created a CI/CD pipeline to use Blue/Green Deployment to deploy a static website.
 
 ## Project Requirement:
 
-> To be able to use this CI/CD pipeline you will need to install:
+> This project requires:
 
 * Jenkins
 * Blue Ocean Plugin in Jenkins
@@ -30,9 +30,11 @@ In this project, I applied my skills and knowledge which was developed throughou
 
 ## The files included are:
 ```sh
-* /Create-clusters-pipeline : CloudFormation Script of Cluster Pipeline file 
-* /Deploy-containers-pipeline : Deployment Script of Containers Pipeline file
-* Jenkinsfile : Jenkinsfile for Creating Pipeline
+Master Branch
+* Jenkinsfile : Jenkinsfile for creating cluster
+
+Deployment Branch
+* Jenkinsfile : Jenkinsfile for deploying container
 * Dockerfile : Dockerfile for building the image 
 * green-controller.json : Create a replication controller green pod
 * green-service.json : Create the green service
@@ -43,5 +45,6 @@ In this project, I applied my skills and knowledge which was developed throughou
 
 ## Run the project:
 ```sh
-* Please follow to steps of screenshot in Images-of-result-deploy folder.
+* Run the Master branch files with Jenkins.
+* Run the Deploy branch files with Jenkins.
 ```

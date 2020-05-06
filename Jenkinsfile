@@ -6,7 +6,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-west-2', credentials:'developer') {
 					sh '''
-						eksctl create cluster \
+						eksctl update cluster \
 						--name k8scluster \
 						--version 1.13 \
 						--nodegroup-name standard-workers \

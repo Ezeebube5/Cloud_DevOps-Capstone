@@ -4,10 +4,10 @@ pipeline {
 
 		stage('Create kubernetes cluster') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
 						eksctl create cluster \
-						--name aws-static \
+						--name k8scluster \
 						--version 1.13 \
 						--nodegroup-name standard-workers \
 						--node-type t2.small \
@@ -26,11 +26,11 @@ pipeline {
 
 		
 
-		stage('Create conf file cluster') {
+		stage('Create config file cluster') {
 			steps {
-				withAWS(region:'us-west-2', credentials:'aws-static') {
+				withAWS(region:'us-west-2', credentials:'jenkins') {
 					sh '''
-						aws eks --region us-west-2 update-kubeconfig --name aws-static
+						aws eks --region us-west-2 update-kubeconfig --name k8scluster
 					'''
 				}
 			}
